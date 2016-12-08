@@ -19,11 +19,15 @@ class BookResultsViewController: UIViewController,UICollectionViewDelegate,UICol
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.navigationController?.navigationBar.barTintColor = .red
+        self.title = "GOOGLE BOOKS"
         resultsCollectionView.delegate = self
         resultsCollectionView.dataSource = self
         resultsCollectionView.showsVerticalScrollIndicator = false
         searchBar.delegate = self
+        searchBar.backgroundColor = .red
+        let textFieldInsideSearchBar = searchBar.value(forKey: "searchField") as? UITextField
+        textFieldInsideSearchBar?.textColor = .white
+
         
     }
     

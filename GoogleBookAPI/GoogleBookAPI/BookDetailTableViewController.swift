@@ -12,13 +12,13 @@ class BookDetailTableViewController: UITableViewController {
     var book: Book!
     var bookSelfLink: String = ""{
         didSet{
-            ApiRequestManager.manager.getData(from: self.bookSelfLink) { (data) in
-                self.book = Book.makeBookObject(from: data)
-                DispatchQueue.main.async {
-                    self.tableView.reloadData()
-        
-                }
-            }
+//            ApiRequestManager.manager.getData(from: self.bookSelfLink) { (data) in
+//                self.book = Book.makeBookObject(from: data)
+//                DispatchQueue.main.async {
+//                    self.tableView.reloadData()
+//        
+//                }
+//            }
             
         }
     }
@@ -26,12 +26,21 @@ class BookDetailTableViewController: UITableViewController {
         super.viewDidLoad()
         self.navigationController?.hidesBarsOnSwipe = true
         self.title = "About this book"
-        self.navigationController?.navigationBar.backgroundColor = .white
         self.tableView.allowsSelection = false
-        self.tableView.separatorStyle = .singleLine
         self.tableView.separatorInset.left = 0
         self.tableView.rowHeight = UITableViewAutomaticDimension
         self.tableView.estimatedRowHeight = 200
+        self.tableView.showsVerticalScrollIndicator = false
+        
+        
+        ApiRequestManager.manager.getData(from: self.bookSelfLink) { (data) in
+            self.book = Book.makeBookObject(from: data)
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
+                
+            }
+        }
+        
     }
     
     // MARK: - Table view data source
